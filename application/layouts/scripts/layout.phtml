@@ -1,0 +1,103 @@
+<?php echo $this->doctype() ?>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php 
+      $this->headTitle('Message Board');
+      echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/site.css');
+      echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/main.css');
+      echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/normalize.css');
+    ?>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <link href="http://fonts.googleapis.com/css?family=Telex" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl()?>/media/js/jquery.validate.js"></script>
+    <?php echo $this->javascriptHelper() ?>
+    <?php echo $this->headScript() ?>
+</head>
+<body>
+    <header id="top">
+      <div class="loggedout-menu">
+        <div id="logo" class="lfloat"><a href="#"><span class="m">M</span><span class="e">E</span><span class="s">S</span><span class="h">H</span></a></div>
+        <div id="tagline" class="lfloat">Join The Conversation</div>
+
+        <div class="rfloat" id="login-signup">
+            <a href="#login-box" id="login-link">Login</a> | <a href="#signup-box" id="signup-link">Sign Up</a>
+        </div>
+      </div> <!-- End logged out div-->
+    <div class="login-pop" id="login-box">
+        <a href="#" class="close"><img src="<?php echo $this->baseUrl()?>/media/images/close_box.png" class="btn_close rfloat" title="Close Window" alt="Close" /></a>
+        <?php
+            echo $this->loginForm;
+        ?>
+    </div>
+
+    <div class="signup-pop" id="signup-box">
+        <a href="#" class="close"><img src="<?php echo $this->baseUrl()?>/media/images/close_box.png" class="btn_close rfloat" title="Close Window" alt="Close" /></a>
+        <?php
+            echo $this->signupForm;
+        ?>
+    </div>
+    </header>
+    <div id="content">
+        <?php echo $this->layout()->content; ?>
+    </div>
+  <!-- Main content goes here -->
+
+  <!-- JQuery Login Modal-->
+    <script type="text/javascript">
+        $(document).ready ( function() {
+            $('a#login-link').click (function () {
+                
+                // Get the link's  href attribute
+                var loginBox = $(this).attr('href');
+        
+                $(loginBox).fadeIn(300);
+                
+                $('body').append('<div id="mask"></div>');
+                $('#mask').fadeIn(300);
+
+                return false;
+            });
+
+
+            $('a.close, #mask').live('click', function() { 
+	        $('.login-pop, #mask').fadeOut(300 , function() {
+	    });
+	
+            $('label.error').hide();
+            return false;
+            });
+        });
+
+    </script>
+
+    <!-- JQuery Signup Modal-->
+    <script type="text/javascript">
+        $(document).ready ( function() {
+            $('a#signup-link').click (function () {
+                
+                // Get the link's  href attribute
+                var signupBox = $(this).attr('href');
+        
+                $(signupBox).fadeIn(300);
+                
+                $('body').append('<div id="mask"></div>');
+                $('#mask').fadeIn(300);
+
+                return false;
+            });
+
+
+            $('a.close, #mask').live('click', function() { 
+                $('.signup-pop, #mask').fadeOut(300 , function() {
+            });
+
+            return false;
+            });
+        });
+
+    </script>
+</body>
+</html>
